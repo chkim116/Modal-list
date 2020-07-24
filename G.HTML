@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .navbar__menu-add {
+        cursor: pointer;
+      }
+      .wrap {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        position: fixed;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 199;
+        display: none;
+      }
+
+      .modal {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        line-height: 60px;
+        background-color: white;
+        position: relative;
+        width: 320px;
+        height: 150px;
+        top: 250px;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="modal">
+        <button class="modal__closed">X</button>
+        <form class="modal__add">
+          <input type="text" placeholder="추가하고 싶은 리스트를 작성하세요" />
+        </form>
+        <button class="modal__addbtn">추가</button>
+      </div>
+    </div>
+
+    <div class="navbar__menu-add">
+      추가
+    </div>
+    <script>
+      // 모달창 입력 값 관리
+      const wrapModal = document.querySelector(".wrap");
+      const submitAddList = document.querySelector(".modal__add");
+      const clickAddList = document.querySelector(".modal__addbtn");
+      const listInput = submitAddList.querySelector("input");
+
+      function submitAdd(event) {
+        event.preventDefault();
+        if (listInput.value !== "") {
+          createList(listInput.value);
+          listInput.value = "";
+          closedModal();
+        } else {
+          alert("입력해 주세요");
+        }
+      }
+
+      function clickAdd(event) {
+        submitAdd(event);
+      }
+
+      submitAddList.addEventListener("submit", submitAdd);
+      clickAddList.addEventListener("click", clickAdd);
+
+      // 모달창 오픈
+      const closeModal = document.querySelector(".modal__closed");
+      const showBtn = document.querySelector(".navbar__menu-add");
+
+      function closedModal() {
+        wrapModal.style.display = "none";
+      }
+
+      function showModal() {
+        wrapModal.style.display = "block";
+      }
+
+      closeModal.addEventListener("click", closedModal);
+      showBtn.addEventListener("click", showModal);
+    </script>
+  </body>
+</html>

@@ -1,9 +1,4 @@
 const wrapList = document.querySelector(".wrap__list");
-const wrapModal = document.querySelector(".wrap");
-const submitAddList = document.querySelector(".modal__add");
-const listInput = submitAddList.querySelector("input");
-const closeModal = document.querySelector(".modal__closed");
-const clickAddList = document.querySelector(".modal__addbtn");
 const listAllDelBtn = document.querySelector(".navbar__menu-remove");
 const section = document.querySelector("#section");
 const SHOPLIST = "shopp__list";
@@ -11,6 +6,16 @@ const SHOPLIST = "shopp__list";
 let thisList = [];
 
 // 리스트 전부 삭제
+
+function listRemove() {
+  const div = wrapList.querySelector("div");
+  wrapList.removeChild(div);
+  const cleanList = thisList.filter((list) => {
+    return list.id !== parseInt(div.id);
+  });
+  thisList = cleanList;
+  saveList();
+}
 
 function listAllRemove() {
   while (wrapList.firstChild) {
@@ -20,6 +25,7 @@ function listAllRemove() {
   }
   wrapList.style.display = "none";
 }
+listAllDelBtn.addEventListener("click", listAllRemove);
 
 // 로컬스토리지 저장
 function saveList() {
@@ -30,12 +36,16 @@ function saveList() {
 function createList(value) {
   const wrapLists = document.querySelector(".wrap__list");
   const div = document.createElement("div");
-  listAllDelBtn.addEventListener("click", listAllRemove);
-  div.classList.add(SHOPLIST);
-  wrapLists.appendChild(div);
   div.innerText = value;
+  wrapLists.appendChild(div);
+  div.classList.add(SHOPLIST);
+  const span = document.createElement("span");
+  span.innerText = "X";
+  div.appendChild(span);
+  span.addEventListener("click", listRemove);
   // 문자열에는 innerText 후 child를 추가하는 거다.
-  let Id = thisList.length + 1;
+  const Id = thisList.length + 1;
+  div.id = Id;
   listObj = {
     text: value,
     id: Id,
@@ -63,9 +73,11 @@ init();
 
 // 모달창
 
-function closedModal() {
-  wrapModal.style.display = "none";
-}
+// 모달창 입력 값 관리
+const wrapModal = document.querySelector(".wrap");
+const submitAddList = document.querySelector(".modal__add");
+const clickAddList = document.querySelector(".modal__addbtn");
+const listInput = submitAddList.querySelector("input");
 
 function submitAdd(event) {
   event.preventDefault();
@@ -82,15 +94,20 @@ function clickAdd(event) {
   submitAdd(event);
 }
 
-closeModal.addEventListener("click", closedModal);
 submitAddList.addEventListener("submit", submitAdd);
 clickAddList.addEventListener("click", clickAdd);
 
 // 모달창 오픈
+const closeModal = document.querySelector(".modal__closed");
 const showBtn = document.querySelector(".navbar__menu-add");
+
+function closedModal() {
+  wrapModal.style.display = "none";
+}
 
 function showModal() {
   wrapModal.style.display = "block";
 }
 
+closeModal.addEventListener("click", closedModal);
 showBtn.addEventListener("click", showModal);
