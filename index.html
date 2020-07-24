@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pick your bag</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- 모달 -->
+    <div class="wrap">
+
+      <div class="modal">
+        <button class="modal__closed">X</button>
+        <form class="modal__add">
+          <input type="text" placeholder="추가하고 싶은 리스트를 작성하세요" />
+        </form>
+        <button class="modal__addbtn">추가</button>
+      </div>
+    </div>
+      <!-- 넷바 -->
+      <nav id="nav">
+        <div class="navbar__menu-home">
+          <img src="images/store-solid.svg" width="45px" />
+        </div>
+        <div class="navbar">
+          <div class="navbar__menu-add">
+            추가
+          </div>
+          <div class="navbar__menu-remove">
+            삭제
+          </div>
+        </div>
+      </nav>
+      <section id="section">
+        <div class="wrap__list"></div>
+        <button class="buybtn">buy it now</button>
+      </section>
+      <script src="javascript.js"></script>
+    </div>
+</html>
