@@ -15,24 +15,10 @@ let thisList = [];
 function listAllRemove() {
   while (wrapList.firstChild) {
     wrapList.removeChild(wrapList.lastChild);
+    localStorage.removeItem("list");
+    thisList = [];
   }
-  localStorage.removeItem("list");
-  thisList = [];
   wrapList.style.display = "none";
-}
-listAllDelBtn.addEventListener("click", listAllRemove);
-
-// 하나만 삭제
-
-function listRemove(e) {
-  const delNode = e.target.parentNode;
-  wrapList.removeChild(delNode);
-  const cleanToDos = thisList.filter(function (list) {
-    return list.id !== parseInt(delNode.id);
-  });
-  console.log(cleanToDos);
-  thisList = cleanToDos;
-  saveList();
 }
 
 // 로컬스토리지 저장
@@ -44,13 +30,10 @@ function saveList() {
 function createList(value) {
   const wrapLists = document.querySelector(".wrap__list");
   const div = document.createElement("div");
-  const span = document.createElement("span");
+  listAllDelBtn.addEventListener("click", listAllRemove);
   div.classList.add(SHOPLIST);
   wrapLists.appendChild(div);
-  span.innerText = "X";
-  span.addEventListener("click", listRemove);
   div.innerText = value;
-  div.appendChild(span);
   // 문자열에는 innerText 후 child를 추가하는 거다.
   let Id = thisList.length + 1;
   listObj = {
@@ -64,14 +47,14 @@ function createList(value) {
 
 function init() {
   const loadList = localStorage.getItem("list");
-  if (loadList === null || loadList === "{}") {
-    wrapList.style.display = "none";
-  } else {
+  if (loadList !== null) {
     wrapList.style.display = "block";
     const loadedList = JSON.parse(loadList);
     loadedList.forEach((list) => {
       createList(list.text);
     });
+  } else {
+    wrapList.style.display = "none";
   }
 }
 
