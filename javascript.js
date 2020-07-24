@@ -64,9 +64,8 @@ function init() {
   }
 }
 
-// 아.. forEach의 인자가 객체를 부르는 인자였다.. 깨달음.. 무릎을 탁
-
 init();
+// 아.. forEach의 인자가 객체를 부르는 인자였다.. 깨달음.. 무릎을 탁
 
 // 모달창
 
@@ -90,10 +89,10 @@ submitAddList.addEventListener("submit", submitAdd);
 clickAddList.addEventListener("click", clickAdd);
 
 // 모달창 오픈
-const addBtn = document.querySelector(".navbar__menu-add");
+const showBtn = document.querySelector(".navbar__menu-add");
 
 function showModal() {
   wrapModal.style.display = "block";
 }
 
-addBtn.addEventListener("click", showModal);
+showBtn.addEventListener("click", showModal);
