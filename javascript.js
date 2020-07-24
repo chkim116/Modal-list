@@ -75,9 +75,13 @@ function closedModal() {
 
 function submitAdd(event) {
   event.preventDefault();
-  createList(listInput.value);
-  listInput.value = "";
-  closedModal();
+  if (listInput.value !== "") {
+    createList(listInput.value);
+    listInput.value = "";
+    closedModal();
+  } else {
+    alert("입력해주세요");
+  }
 }
 
 function clickAdd(event) {
