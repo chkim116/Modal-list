@@ -90,21 +90,6 @@ body {
 .shopp__list > span:hover {
   color: rgba(0, 0, 0, 0.6);
 }
-.buybtn {
-  color: white;
-  margin: 20px auto 0 auto;
-  padding: 10px;
-  font-size: 2rem;
-  outline: none;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  background: none;
-  border-radius: 7px;
-  cursor: pointer;
-}
-
-.buybtn:hover {
-  background-color: rgba(0, 0, 0, 0.2);
-}
 
 .wrap {
   width: 100%;
